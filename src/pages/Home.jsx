@@ -1,12 +1,12 @@
 import React from "react";
 import { CategoryPreviews, PromoSectionHome } from "../components";
-import { ProductListHome } from "../components/ProductListHome";
+import { ProductListHome } from "../ProductListHome";
 
 export const Home = () => {
   return (
     <>
       <PromoSectionHome />;
-      <ProductListHome />;
+      <ProductListHome />
       <CategoryPreviews />
     </>
   );

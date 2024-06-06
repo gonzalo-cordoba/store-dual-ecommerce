@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const callouts = [
   {
     name: "Living",
@@ -5,7 +7,7 @@ const callouts = [
     imageSrc:
       "https://lh4.googleusercontent.com/proxy/a44rRLLygq-w2sKFJSMtROIIXn8PHvuk-juIsIYDIJ0192AAosAavw-JQyNTVTaDB2KQZ2KZ3Nzyw3ym9DdSnWwKM7PrZPPEwCCkIYKGJD4uzkImbl3PXXIS",
     imageAlt: "Nuestros mejores productos para tu Living",
-    href: "#",
+    href: "/living",
   },
   {
     name: "Habitacion",
@@ -13,7 +15,7 @@ const callouts = [
     imageSrc:
       "https://hips.hearstapps.com/hmg-prod/images/nicole-franzen-1650558353.jpg",
     imageAlt: "Nuestros mejores productos para tu habitación",
-    href: "#",
+    href: "/habitacion",
   },
   {
     name: "Viajes",
@@ -21,7 +23,7 @@ const callouts = [
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg",
     imageAlt: "Nuestros mejores productos para tus viajes",
-    href: "#",
+    href: "/productos",
   },
 ];
 
@@ -45,10 +47,10 @@ export const CategoryPreviews = () => {
                   />
                 </div>
                 <h3 className="mt-6 text-sm text-gray-500">
-                  <a href={callout.href}>
+                  <Link to={callout.href}>
                     <span className="absolute inset-0" />
                     {callout.name}
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-base font-semibold text-gray-900">
                   {callout.description}

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const PromoSectionHome = () => {
   return (
     <div className="relative overflow-hidden bg-white">
@@ -81,12 +83,13 @@ export const PromoSectionHome = () => {
                 </div>
               </div>
 
-              <a
+              <Link
+                to="/productos"
                 href="#"
                 className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700"
               >
                 Ver productos
-              </a>
+              </Link>
             </div>
           </div>
         </div>
