@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useForm } from "../hooks";
+import { Google } from "@mui/icons-material";
+import { Typography } from "@mui/material";
+import { checkingAuthentication, startGoogleSignIn } from "../store/auth";
 
 export const Login = () => {
+  const { status } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+
+  const { email, password, onInputChange } = useForm({
+    email: "fernando@google.com",
+    password: "123456",
+  });
+
+  const isAuthenticating = useMemo(() => status === "checking", [status]);
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    console.log({ email, password });
+    dispatch(checkingAuthentication());
+  };
+
+  const onGoogleSignIn = () => {
+    console.log("onGoogleSignIn");
+    dispatch(startGoogleSignIn());
+  };
+
   return (
     <>
       {/*
@@ -25,7 +53,12 @@ export const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form
+            className="space-y-6"
+            action="#"
+            method="POST"
+            onSubmit={onSubmit}
+          >
             <div>
               <label
                 htmlFor="email"
@@ -39,8 +72,11 @@ export const Login = () => {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  placeholder="correo@gmail.com"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  value={email}
+                  onChange={onInputChange}
                 />
               </div>
             </div>
@@ -70,16 +106,29 @@ export const Login = () => {
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  value={password}
+                  onChange={onInputChange}
                 />
               </div>
             </div>
 
             <div>
               <button
+                disabled={isAuthenticating}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Iniciar sesión
+              </button>
+            </div>
+            <div>
+              <button
+                disabled={isAuthenticating}
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={onGoogleSignIn}
+              >
+                <Google />
+                <Typography sx={{ ml: 1 }}>Google</Typography>
               </button>
             </div>
           </form>

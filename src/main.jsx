@@ -5,13 +5,17 @@ import "./styles/index.css";
 import { NavBar } from "./components/NavBar.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { Footer } from "./components/Footer.jsx";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <NavBar />
-      <App />
-      <Footer />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <NavBar />
+        <App />
+        <Footer />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );

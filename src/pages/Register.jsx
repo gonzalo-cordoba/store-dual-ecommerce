@@ -1,8 +1,23 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
+import { useForm } from "../hooks";
+
+const formData = {
+  email: "fernando@google.com",
+  password: "123456",
+  displayName: "Fernando Herrera",
+};
 
 export const Register = () => {
+  const { displayName, email, password, onInputChange, formState } =
+    useForm(formData);
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    console.log(formState);
+  };
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -18,43 +33,33 @@ export const Register = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form
+            onSubmit={onSubmit}
+            className="space-y-6"
+            action="#"
+            method="POST"
+          >
             <div>
               <label
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-white-900"
               >
-                Nombre
+                Nombre completo
               </label>
               <div className="mt-2">
                 <input
                   id="text"
-                  name="name"
                   type="text"
                   autoComplete="text"
                   required
+                  name="displayName"
+                  value={displayName}
+                  onChange={onInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-white-900"
-              >
-                Apellido
-              </label>
-              <div className="mt-2">
-                <input
-                  id="text"
-                  name="name"
-                  type="text"
-                  autoComplete="text"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
+
             <div>
               <label
                 htmlFor="email"
@@ -65,10 +70,12 @@ export const Register = () => {
               <div className="mt-2">
                 <input
                   id="email"
-                  name="email"
                   type="email"
                   autoComplete="email"
                   required
+                  name="email"
+                  value={email}
+                  onChange={onInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -86,10 +93,12 @@ export const Register = () => {
               <div className="mt-2">
                 <input
                   id="password"
-                  name="password"
                   type="password"
                   autoComplete="current-password"
                   required
+                  name="password"
+                  value={password}
+                  onChange={onInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
