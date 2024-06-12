@@ -10,6 +10,7 @@ import {
   Room,
 } from "./pages";
 import "./styles/index.css";
+import "./styles/flags-styles/flags.css";
 
 function App() {
   return (
