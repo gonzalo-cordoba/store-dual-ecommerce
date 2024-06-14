@@ -11,19 +11,29 @@ import {
 } from "./pages";
 import "./styles/index.css";
 import "./styles/flags-styles/flags.css";
+import { CartProvider } from "./context/CartContext";
+import { ProductList } from "./components/pages-components";
+import { ProductOverviews } from "./components/ProductOverviews";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/productos" element={<Products />} />
-      <Route path="/living" element={<Living />} />
-      <Route path="/habitacion" element={<Room />} />
-      <Route path="/contacto" element={<Contact />} />
-      <Route path="/carrito" element={<Cart />} />
-      <Route path="/registrarse" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
+    <CartProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/productos"
+          element={<Products />}
+          component={ProductList}
+        />
+        <Route path="/living" element={<Living />} component={ProductList} />
+        <Route path="/habitacion" element={<Room />} component={ProductList} />
+        <Route path="/contacto" element={<Contact />} />
+        <Route path="/carrito" element={<Cart />} component={Cart} />
+        <Route path="/registrarse" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/productos-vista" element={<ProductOverviews />} />
+      </Routes>
+    </CartProvider>
   );
 }
 
