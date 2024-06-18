@@ -13,7 +13,7 @@ import "./styles/index.css";
 import "./styles/flags-styles/flags.css";
 import { CartProvider } from "./context/CartContext";
 import { ProductList } from "./components/pages-components";
-import { ProductOverviews } from "./components/ProductOverviews";
+import { Checkout } from "./pages/Checkout";
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
         <Route path="/carrito" element={<Cart />} component={Cart} />
         <Route path="/registrarse" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/productos-vista" element={<ProductOverviews />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </CartProvider>
   );
