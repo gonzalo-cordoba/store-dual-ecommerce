@@ -12,5 +12,6 @@ export default {
     require("daisyui"),
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/forms"),
+    require("tailwindcss-animate"),
   ],
 };

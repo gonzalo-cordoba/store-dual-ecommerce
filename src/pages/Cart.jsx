@@ -9,6 +9,7 @@ import {
   Divider,
 } from "@mui/material";
 import { Title } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 export const Cart = () => {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart } =
@@ -104,17 +105,19 @@ export const Cart = () => {
                 <span>USD {total.toFixed(2)}</span>
               </div>
             </CardContent>
-            <Button
-              sx={{
-                bgcolor: "blue",
-                color: "white",
-                width: "100%",
-                "&:hover": { bgcolor: "#5c2b83" },
-              }}
-              className="w-full"
-            >
-              Finalizar compra
-            </Button>
+            <Link to="/checkout">
+              <Button
+                sx={{
+                  bgcolor: "blue",
+                  color: "white",
+                  width: "100%",
+                  "&:hover": { bgcolor: "#5c2b83" },
+                }}
+                className="w-full"
+              >
+                Finalizar compra
+              </Button>
+            </Link>
           </Card>
         </div>
       </div>
