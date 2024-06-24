@@ -4,9 +4,11 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase-config";
 import { AddCartButton } from "../button/AddCartButton";
 import { Link } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 export const ProductList = ({ category }) => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -28,6 +30,8 @@ export const ProductList = ({ category }) => {
         setProducts(filteredProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -43,6 +47,23 @@ export const ProductList = ({ category }) => {
       throw new Error("Error getting products:", error);
     }
   };
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vf",
+        }}
+        className="flex justify-center items-center min-h-screen"
+      >
+        <CircularProgress />
+        <h1>Cargando...</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white">
