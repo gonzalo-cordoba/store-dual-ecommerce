@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCart } from "../context/CartContext";
 import {
+  Alert,
   Button,
   Card,
   CardActions,
@@ -9,16 +10,27 @@ import {
   Divider,
 } from "@mui/material";
 import { Title } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Cart = () => {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart } =
     useCart();
 
+  const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
+
   const total = cart.reduce(
     (acc, item) => acc + (item.price ? item.price * item.quantity : 0),
     0
   );
+
+  const handleCheckout = () => {
+    if (cart.length === 0) {
+      setShowAlert(true);
+    } else {
+      navigate("/checkout");
+    }
+  };
 
   return (
     <div
@@ -37,6 +49,11 @@ export const Cart = () => {
               <p className="text-gray-500 dark:text-gray-400">
                 Revise sus artículos y proceda al pago.
               </p>
+            )}
+            {showAlert && (
+              <Alert severity="warning" onClose={() => setShowAlert(false)}>
+                No puedes avanzar en la compra si el carrito está vacío.
+              </Alert>
             )}
           </div>
           <div className="grid gap-4">
@@ -105,19 +122,18 @@ export const Cart = () => {
                 <span>USD {total.toFixed(2)}</span>
               </div>
             </CardContent>
-            <Link to="/checkout">
-              <Button
-                sx={{
-                  bgcolor: "blue",
-                  color: "white",
-                  width: "100%",
-                  "&:hover": { bgcolor: "#5c2b83" },
-                }}
-                className="w-full"
-              >
-                Finalizar compra
-              </Button>
-            </Link>
+            <Button
+              onClick={handleCheckout}
+              sx={{
+                bgcolor: "blue",
+                color: "white",
+                width: "100%",
+                "&:hover": { bgcolor: "#5c2b83" },
+              }}
+              className="w-full"
+            >
+              Finalizar compra
+            </Button>
           </Card>
         </div>
       </div>
