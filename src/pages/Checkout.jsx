@@ -1,10 +1,12 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useCart } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 export const Checkout = () => {
   const { cart } = useCart();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -28,6 +30,10 @@ export const Checkout = () => {
       text: "Su orden ha sido completada con éxito.",
       icon: "success",
       confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
+      }
     });
   };
 
