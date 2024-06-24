@@ -239,16 +239,16 @@ export const Checkout = () => {
               </div>
             </div>
           </div>
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-4 rounded-md"
+              onClick={onSubmit}
+            >
+              Completar orden
+            </button>
+          </div>
         </form>
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded-md"
-            onClick={onSubmit}
-          >
-            Completar orden
-          </button>
-        </div>
         <div className="mt-8">
           <h2 className="text-xl font-semibold mb-4">Resumen del pedido</h2>
           <div className="grid gap-4">
