@@ -1,21 +1,61 @@
 import React from "react";
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../hooks";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { FirebaseAuth, db } from "../firebase/firebase-config";
+import Swal from "sweetalert2";
 
 const formData = {
-  email: "fernando@google.com",
-  password: "123456",
-  displayName: "Fernando Herrera",
+  email: "",
+  password: "",
+  displayName: "",
 };
 
 export const Register = () => {
+  const navigate = useNavigate();
   const { displayName, email, password, onInputChange, formState } =
     useForm(formData);
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        FirebaseAuth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        displayName,
+        email,
+        uid: user.uid,
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: "Registro exitoso",
+        text: "El usuario ha sido registrado exitosamente",
+      });
+
+      navigate("/");
+    } catch (error) {
+      if (error.code === "auth/email-already-in-use") {
+        Swal.fire({
+          icon: "error",
+          title: "Error de registro",
+          text: "El correo electrónico ya está en uso.",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error de registro",
+          text: `Error registrando al usuario: ${error.message}`,
+        });
+      }
+    }
   };
 
   return (
@@ -28,7 +68,7 @@ export const Register = () => {
             alt="Tienda dual"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white-900">
-            Registrate
+            Regístrate
           </h2>
         </div>
 
@@ -41,16 +81,17 @@ export const Register = () => {
           >
             <div>
               <label
-                htmlFor="email"
+                htmlFor="displayName"
                 className="block text-sm font-medium leading-6 text-white-900"
               >
                 Nombre completo
               </label>
               <div className="mt-2">
                 <input
-                  id="text"
+                  id="displayName"
                   type="text"
-                  autoComplete="text"
+                  autoComplete="name"
+                  placeholder="Ingrese su nombre completo"
                   required
                   name="displayName"
                   value={displayName}
@@ -72,6 +113,7 @@ export const Register = () => {
                   id="email"
                   type="email"
                   autoComplete="email"
+                  placeholder="Ingrese su email"
                   required
                   name="email"
                   value={email}
@@ -95,6 +137,7 @@ export const Register = () => {
                   id="password"
                   type="password"
                   autoComplete="current-password"
+                  placeholder="Ingrese su contraseña"
                   required
                   name="password"
                   value={password}

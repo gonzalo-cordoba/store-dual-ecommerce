@@ -1,45 +1,73 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../hooks";
 import { Google } from "@mui/icons-material";
 import { Typography } from "@mui/material";
-import { checkingAuthentication, startGoogleSignIn } from "../store/auth";
+import { signInWithGoogle } from "../firebase/providers";
+import { checkingAuthentication } from "../store/auth";
+import Swal from "sweetalert2";
 
 export const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { status } = useSelector((state) => state.auth);
 
-  const dispatch = useDispatch();
-
   const { email, password, onInputChange } = useForm({
-    email: "fernando@google.com",
-    password: "123456",
+    email: "",
+    password: "",
   });
 
+  const [error, setError] = useState(null);
   const isAuthenticating = useMemo(() => status === "checking", [status]);
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-
-    console.log({ email, password });
     dispatch(checkingAuthentication());
+
+    try {
+      await FirebaseAuth.signInWithEmailAndPassword(email, password);
+
+      onInputChange({ target: { name: "email", value: "" } });
+      onInputChange({ target: { name: "password", value: "" } });
+
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Error de inicio de sesión",
+        text: error.message,
+      });
+    }
   };
 
-  const onGoogleSignIn = () => {
-    console.log("onGoogleSignIn");
-    dispatch(startGoogleSignIn());
+  const onGoogleSignIn = async () => {
+    dispatch({ type: "START_GOOGLE_SIGN_IN" });
+    try {
+      const result = await signInWithGoogle();
+      if (result.ok) {
+        navigate("/");
+      } else {
+        setError(result.errorMessage);
+        Swal.fire({
+          icon: "error",
+          title: "Error de inicio de sesión con Google",
+          text: result.errorMessage,
+        });
+      }
+    } catch (error) {
+      setError(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Error de inicio de sesión con Google",
+        text: error.message,
+      });
+    }
   };
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -53,12 +81,7 @@ export const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form
-            className="space-y-6"
-            action="#"
-            method="POST"
-            onSubmit={onSubmit}
-          >
+          <form className="space-y-6" onSubmit={onSubmit}>
             <div>
               <label
                 htmlFor="email"
@@ -104,6 +127,7 @@ export const Login = () => {
                   name="password"
                   type="password"
                   autoComplete="current-password"
+                  placeholder="Ingrese su contraseña"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={password}
@@ -111,6 +135,10 @@ export const Login = () => {
                 />
               </div>
             </div>
+
+            {error && (
+              <div className="text-red-600 text-sm mt-2">Error: {error}</div>
+            )}
 
             <div>
               <button
@@ -139,7 +167,7 @@ export const Login = () => {
               to="/registrarse"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Registrate
+              Regístrate
             </Link>
           </p>
         </div>
