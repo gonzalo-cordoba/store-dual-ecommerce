@@ -1,4 +1,3 @@
-// App.jsx
 import { Route, Routes } from "react-router-dom";
 import {
   Cart,
@@ -10,7 +9,7 @@ import {
   Register,
   Room,
 } from "./pages";
-import { CartProvider, useCart } from "./context/CartContext";
+import { CartProvider } from "./context/CartContext";
 import { ProductList } from "./components/pages-components";
 import { ProtectedCheckout } from "./pages/Checkout";
 

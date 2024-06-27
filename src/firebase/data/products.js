@@ -43,7 +43,6 @@ const products = [
       "Hand holding black machined steel mechanical pencil with brass tip and top.",
     category: "Habitacion",
   },
-  // More products...
 ];
 
 export default products;
