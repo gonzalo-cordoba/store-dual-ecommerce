@@ -1,3 +1,4 @@
+// App.jsx
 import { Route, Routes } from "react-router-dom";
 import {
   Cart,
@@ -9,11 +10,9 @@ import {
   Register,
   Room,
 } from "./pages";
-import "./styles/index.css";
-import "./styles/flags-styles/flags.css";
-import { CartProvider } from "./context/CartContext";
+import { CartProvider, useCart } from "./context/CartContext";
 import { ProductList } from "./components/pages-components";
-import { Checkout } from "./pages/Checkout";
+import { ProtectedCheckout } from "./pages/Checkout";
 
 function App() {
   return (
@@ -31,7 +30,7 @@ function App() {
         <Route path="/carrito" element={<Cart />} component={Cart} />
         <Route path="/registrarse" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout" element={<ProtectedCheckout />} />
       </Routes>
     </CartProvider>
   );

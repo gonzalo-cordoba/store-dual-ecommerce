@@ -1,8 +1,21 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+
+export const ProtectedCheckout = () => {
+  const { cart } = useCart();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (cart.length === 0) {
+      navigate("/carrito");
+    }
+  }, [cart, navigate]);
+
+  return <Checkout />;
+};
 
 export const Checkout = () => {
   const { cart } = useCart();
@@ -70,9 +83,11 @@ export const Checkout = () => {
                 </label>
                 <input
                   id="name"
+                  name="name"
                   placeholder="Ingrese su nombre"
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                   {...register("name", { required: true })}
+                  autoComplete="name"
                 />
                 {errors.name && (
                   <span className="text-red-600">Este campo es requerido</span>
@@ -87,9 +102,11 @@ export const Checkout = () => {
                 </label>
                 <input
                   id="address"
+                  name="address"
                   placeholder="Ingrese su dirección"
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                   {...register("address", { required: true })}
+                  autoComplete="street-address"
                 />
                 {errors.address && (
                   <span className="text-red-600">Este campo es requerido</span>
@@ -104,9 +121,11 @@ export const Checkout = () => {
                 </label>
                 <input
                   id="city"
+                  name="city"
                   placeholder="Ingrese su ciudad"
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                   {...register("city", { required: true })}
+                  autoComplete="address-level2"
                 />
                 {errors.city && (
                   <span className="text-red-600">Este campo es requerido</span>
@@ -121,9 +140,11 @@ export const Checkout = () => {
                 </label>
                 <input
                   id="zip"
+                  name="zip"
                   placeholder="Ingrese su código postal"
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                   {...register("zip", { required: true })}
+                  autoComplete="postal-code"
                 />
                 {errors.zip && (
                   <span className="text-red-600">Este campo es requerido</span>
@@ -138,8 +159,10 @@ export const Checkout = () => {
                 </label>
                 <select
                   id="country"
+                  name="country"
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                   {...register("country", { required: true })}
+                  autoComplete="country"
                 >
                   <option value="">Seleccione su país</option>
                   <option value="ar">Argentina</option>
@@ -161,13 +184,14 @@ export const Checkout = () => {
             <div className="grid gap-4 md:grid-cols-2">
               <div className="grid gap-2">
                 <label
-                  htmlFor="card-number"
+                  htmlFor="cardNumber"
                   className="block text-sm font-medium text-black"
                 >
                   Número de Tarjeta
                 </label>
                 <input
-                  id="card-number"
+                  id="cardNumber"
+                  name="cardNumber"
                   placeholder="Ingrese su número de tarjeta"
                   type="text"
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
@@ -175,6 +199,7 @@ export const Checkout = () => {
                     required: true,
                     pattern: /^\d+$/,
                   })}
+                  autoComplete="cc-number"
                 />
                 {errors.cardNumber && (
                   <span className="text-red-600">
@@ -184,16 +209,18 @@ export const Checkout = () => {
               </div>
               <div className="grid gap-2">
                 <label
-                  htmlFor="expiration"
+                  htmlFor="expirationMonth"
                   className="block text-sm font-medium text-black"
                 >
                   Fecha de caducidad
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   <select
-                    id="expiration-month"
+                    id="expirationMonth"
+                    name="expirationMonth"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                     {...register("expirationMonth", { required: true })}
+                    autoComplete="cc-exp-month"
                   >
                     <option value="">Mes</option>
                     <option value="01">Enero</option>
@@ -210,9 +237,11 @@ export const Checkout = () => {
                     <option value="12">Diciembre</option>
                   </select>
                   <select
-                    id="expiration-year"
+                    id="expirationYear"
+                    name="expirationYear"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                     {...register("expirationYear", { required: true })}
+                    autoComplete="cc-exp-year"
                   >
                     <option value="">Año</option>
                     <option value="2023">2023</option>
@@ -231,18 +260,19 @@ export const Checkout = () => {
               </div>
               <div className="grid gap-2">
                 <label
-                  htmlFor="expiration-year"
+                  htmlFor="cvc"
                   className="block text-sm font-medium text-black"
                 >
-                  Fecha de caducidad
+                  CVC
                 </label>
-
                 <input
                   id="cvc"
+                  name="cvc"
                   placeholder="Ingrese su CVC"
                   type="text"
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                   {...register("cvc", { required: true, pattern: /^\d+$/ })}
+                  autoComplete="cc-csc"
                 />
                 {errors.cvc && (
                   <span className="text-red-600">Ingrese un CVC válido</span>
@@ -254,7 +284,6 @@ export const Checkout = () => {
             <button
               type="submit"
               className="bg-black text-white py-2 px-4 rounded-md hover:bg-green-500 hover:text-white"
-              onClick={onSubmit}
             >
               Completar orden
             </button>
