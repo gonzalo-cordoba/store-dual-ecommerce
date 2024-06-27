@@ -55,12 +55,12 @@ export const ProductList = ({ category }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vf",
+          height: "100vh",
         }}
         className="flex justify-center items-center min-h-screen"
       >
         <CircularProgress />
-        <h1>Cargando...</h1>
+        <h1 className="text-black"> Cargando...</h1>
       </div>
     );
   }
@@ -68,19 +68,17 @@ export const ProductList = ({ category }) => {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="sr-only">Products</h2>
-
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {products.map((product) => (
-            <div key={product.id} to="/" className="group">
+            <div key={product.id} className="group">
               <Link
                 to="/"
-                className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7 block"
+                className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7 block transform transition-transform duration-300 ease-in-out group-hover:scale-105"
               >
                 <img
                   src={product.imageSrc}
                   alt={product.imageAlt}
-                  className="h-full w-full object-cover object-center group-hover:opacity-75"
+                  className="h-full w-full object-cover object-center"
                 />
               </Link>
               <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>

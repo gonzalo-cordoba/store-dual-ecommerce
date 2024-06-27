@@ -68,14 +68,14 @@ export const Login = () => {
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
             src="https://cdn-icons-png.flaticon.com/512/5717/5717306.png"
             alt="Tienda dual"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white-900">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Inicia sesión en tu cuenta
           </h2>
         </div>
@@ -85,7 +85,7 @@ export const Login = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-white-900"
+                className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Email
               </label>
@@ -97,7 +97,7 @@ export const Login = () => {
                   autoComplete="email"
                   placeholder="correo@gmail.com"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={email}
                   onChange={onInputChange}
                 />
@@ -108,7 +108,7 @@ export const Login = () => {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-white-900"
+                  className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Contraseña
                 </label>

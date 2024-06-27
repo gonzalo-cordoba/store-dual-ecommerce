@@ -60,14 +60,14 @@ export const Register = () => {
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
             src="https://cdn-icons-png.flaticon.com/512/5717/5717306.png"
             alt="Tienda dual"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white-900">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-black">
             Regístrate
           </h2>
         </div>
@@ -82,7 +82,7 @@ export const Register = () => {
             <div>
               <label
                 htmlFor="displayName"
-                className="block text-sm font-medium leading-6 text-white-900"
+                className="block text-sm font-medium leading-6 text-white-900 text-black"
               >
                 Nombre completo
               </label>
@@ -104,7 +104,7 @@ export const Register = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-white-900"
+                className="block text-sm font-medium leading-6 text-white-900 text-black"
               >
                 Email
               </label>
@@ -127,7 +127,7 @@ export const Register = () => {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-white-900"
+                  className="block text-sm font-medium leading-6 text-white-900 text-black"
                 >
                   Contraseña
                 </label>

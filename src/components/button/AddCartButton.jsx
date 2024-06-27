@@ -22,7 +22,10 @@ export const AddCartButton = ({ product }) => {
   };
 
   return (
-    <button className="btn btn-neutral" onClick={handleAddToCart}>
+    <button
+      className="btn btn-neutral text-white hover:bg-green-600 hover:text-white"
+      onClick={handleAddToCart}
+    >
       Agregar al carrito
     </button>
   );

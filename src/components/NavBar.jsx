@@ -3,15 +3,10 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Transition,
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-import { CartButton, ThemeController, UserButton } from "./button";
+import { CartButton, UserButton } from "./button";
 
 const navigation = [
   { name: "Inicio", href: "/", current: true },
@@ -74,7 +69,6 @@ export const NavBar = () => {
               </div>
               <UserButton />
               <CartButton />
-              <ThemeController />
             </div>
           </div>
 

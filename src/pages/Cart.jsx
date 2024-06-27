@@ -4,13 +4,12 @@ import {
   Alert,
   Button,
   Card,
-  CardActions,
   CardContent,
   CardHeader,
   Divider,
 } from "@mui/material";
 import { Title } from "@mui/icons-material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Cart = () => {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart } =
@@ -34,19 +33,24 @@ export const Cart = () => {
 
   return (
     <div
-      className="container mx-auto px-4 md:px-6 py-12"
-      style={{ fontFamily: "Inter, sans-serif" }}
+      className="container mx-auto px-4 md:px-6 bg-white py-12"
+      style={{
+        fontFamily: "Inter, sans-serif",
+        minHeight: "calc(100vh - 200px)",
+      }}
     >
       <div className="grid md:grid-cols-[1fr_320px] gap-8">
         <div className="grid gap-6">
           <div className="grid gap-4">
-            <h1 className="text-2xl font-bold tracking-tight">Carrito</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-black">
+              Carrito
+            </h1>
             {cart.length === 0 ? (
-              <p className="text-gray-500 dark:text-gray-400">
+              <p className="text-gray-900 dark:text-gray-900">
                 Su carrito está vacío.
               </p>
             ) : (
-              <p className="text-gray-500 dark:text-gray-400">
+              <p className="text-gray-900 dark:text-gray-900">
                 Revise sus artículos y proceda al pago.
               </p>
             )}
@@ -125,10 +129,10 @@ export const Cart = () => {
             <Button
               onClick={handleCheckout}
               sx={{
-                bgcolor: "blue",
+                bgcolor: "black",
                 color: "white",
                 width: "100%",
-                "&:hover": { bgcolor: "#5c2b83" },
+                "&:hover": { bgcolor: "#38b000" },
               }}
               className="w-full"
             >

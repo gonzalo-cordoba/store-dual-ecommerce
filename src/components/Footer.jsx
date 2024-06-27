@@ -51,7 +51,7 @@ export const Footer = () => {
       </nav>
       <aside>
         <p>
-          Copyright © 2024 - Todos los derechos reservados a Gonzalo Cordoba
+          Copyright © 2024 - Todos los derechos reservados a Gonzalo Cordoba.
         </p>
       </aside>
     </footer>

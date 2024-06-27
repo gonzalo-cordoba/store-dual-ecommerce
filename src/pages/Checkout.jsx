@@ -27,7 +27,7 @@ export const Checkout = () => {
   const onSubmit = (data) => {
     Swal.fire({
       title: "Orden Completa",
-      text: "Su orden ha sido completada con éxito.",
+      text: "Su orden ha sido completada con éxito. Nos comunicaremos a la brevedad para el seguimiento de su envío.",
       icon: "success",
       confirmButtonText: "OK",
     }).then((result) => {
@@ -47,22 +47,24 @@ export const Checkout = () => {
   };
 
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6 lg:px-8">
+    <div className="container mx-auto py-12 px-4 md:px-6 lg:px-8 bg-white">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Checkout</h1>
-          <p className="text-gray-600">
+          <h1 className="text-3xl font-bold mb-2 text-black">Checkout</h1>
+          <p className="text-black">
             Complete su pedido proporcionando información de pago y envío.
           </p>
         </div>
         <form className="grid gap-6" onSubmit={handleSubmit(onSubmit, onError)}>
           <div>
-            <h2 className="text-xl font-semibold mb-4">Información de envío</h2>
+            <h2 className="text-xl font-semibold mb-4 text-black">
+              Información de envío
+            </h2>
             <div className="grid gap-4 md:grid-cols-2">
               <div className="grid gap-2">
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   Nombre
                 </label>
@@ -79,7 +81,7 @@ export const Checkout = () => {
               <div className="grid gap-2">
                 <label
                   htmlFor="address"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   Dirección
                 </label>
@@ -96,7 +98,7 @@ export const Checkout = () => {
               <div className="grid gap-2">
                 <label
                   htmlFor="city"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   Ciudad
                 </label>
@@ -113,7 +115,7 @@ export const Checkout = () => {
               <div className="grid gap-2">
                 <label
                   htmlFor="zip"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   Código postal
                 </label>
@@ -130,7 +132,7 @@ export const Checkout = () => {
               <div className="grid gap-2">
                 <label
                   htmlFor="country"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   País
                 </label>
@@ -153,12 +155,14 @@ export const Checkout = () => {
             </div>
           </div>
           <div>
-            <h2 className="text-xl font-semibold mb-4">Información de pago</h2>
+            <h2 className="text-xl font-semibold mb-4 text-black">
+              Información de pago
+            </h2>
             <div className="grid gap-4 md:grid-cols-2">
               <div className="grid gap-2">
                 <label
                   htmlFor="card-number"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   Número de Tarjeta
                 </label>
@@ -181,7 +185,7 @@ export const Checkout = () => {
               <div className="grid gap-2">
                 <label
                   htmlFor="expiration"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   Fecha de caducidad
                 </label>
@@ -227,11 +231,12 @@ export const Checkout = () => {
               </div>
               <div className="grid gap-2">
                 <label
-                  htmlFor="cvc"
-                  className="block text-sm font-medium text-gray-700"
+                  htmlFor="expiration-year"
+                  className="block text-sm font-medium text-black"
                 >
-                  CVC
+                  Fecha de caducidad
                 </label>
+
                 <input
                   id="cvc"
                   placeholder="Ingrese su CVC"
@@ -248,7 +253,7 @@ export const Checkout = () => {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded-md"
+              className="bg-black text-white py-2 px-4 rounded-md hover:bg-green-500 hover:text-white"
               onClick={onSubmit}
             >
               Completar orden
@@ -256,7 +261,9 @@ export const Checkout = () => {
           </div>
         </form>
         <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">Resumen del pedido</h2>
+          <h2 className="text-xl font-semibold mb-4 text-black">
+            Resumen del pedido
+          </h2>
           <div className="grid gap-4">
             {cart.map((item) => (
               <div
@@ -264,11 +271,11 @@ export const Checkout = () => {
                 className="grid grid-cols-[1fr_auto] items-center gap-4"
               >
                 <div>
-                  <h3 className="font-medium">{item.name}</h3>
-                  <p className="text-gray-600">Cantidad: {item.quantity}</p>
+                  <h3 className="font-medium text-black">{item.name}</h3>
+                  <p className="text-black">Cantidad: {item.quantity}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-medium">
+                  <p className="font-medium text-black">
                     ${(item.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
@@ -277,8 +284,8 @@ export const Checkout = () => {
           </div>
           <div className="grid grid-cols-[1fr_auto] items-center gap-4">
             <div>
-              <h3 className="font-medium">Envío</h3>
-              <p className="text-gray-600">Entrega estándar</p>
+              <h3 className="font-medium text-black">Envío</h3>
+              <p className="text-black">Entrega estándar</p>
             </div>
             <div className="text-right">
               <p className="font-medium">$5.99</p>
@@ -287,10 +294,12 @@ export const Checkout = () => {
           <hr className="my-4" />
           <div className="grid grid-cols-[1fr_auto] items-center gap-4">
             <div>
-              <h3 className="font-medium">Total</h3>
+              <h3 className="font-medium text-black">Total</h3>
             </div>
             <div className="text-right">
-              <p className="font-medium text-2xl">${total.toFixed(2)}</p>
+              <p className="font-medium text-2xl text-black">
+                ${total.toFixed(2)}
+              </p>
             </div>
           </div>
         </div>
